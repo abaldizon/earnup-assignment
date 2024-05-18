@@ -6,6 +6,9 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import BasicInfoForm from './basicInfoForm';
+import PokemonForm from './pokemonForm';
+import Pokedex from './pokedex';
 
 const steps = ['User Info', 'Favorite Pokemon', 'Pokemon Info'];
 
@@ -37,17 +40,15 @@ export default function HorizontalLinearStepper() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box 
+        className="stepperContainer"
+    >
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: {
             optional?: React.ReactNode;
           } = {};
-          
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
@@ -55,8 +56,21 @@ export default function HorizontalLinearStepper() {
           );
         })}
       </Stepper>
-      {activeStep === steps.length ? (
-        <>
+      {activeStep === 0 &&
+        <BasicInfoForm
+            handleNext={handleNext}
+        />
+      }
+      {activeStep === 1 &&
+        <PokemonForm
+            handleNext={handleNext}
+        />
+      }
+      {activeStep === 2 &&
+        <Pokedex></Pokedex>
+      }
+      {/* {activeStep === steps.length ? (
+        <>s
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re finished
           </Typography>
@@ -67,7 +81,6 @@ export default function HorizontalLinearStepper() {
         </>
       ) : (
         <>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
@@ -84,7 +97,8 @@ export default function HorizontalLinearStepper() {
             </Button>
           </Box>
         </>
-      )}
+      )} */}
     </Box>
+        
   );
 }
