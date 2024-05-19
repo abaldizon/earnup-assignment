@@ -6,11 +6,14 @@ interface pokemonDataType {
 }
 
 interface DataContextType {
-  pokemonData: pokemonDataType | null;
+  pokemonData: any | null;
   updatePokemon: (newEndpoint: string) => void;
 }
 
-const PokemonContext = createContext<pokemonDataType | null>(null);
+const PokemonContext = createContext<DataContextType>({
+  pokemonData: null,
+  updatePokemon: () => {},
+});
 
 interface DataProviderProps {
   children: ReactNode;
