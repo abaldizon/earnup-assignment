@@ -1,11 +1,12 @@
 import { Box, Button, Grid, Paper, TextField } from "@mui/material"
+import { useContext } from "react"
 import ReactDOM from "react-dom"
 import { useForm, SubmitHandler } from "react-hook-form"
+import { usePokemonContext } from "./pokemonContext"
 
 interface IFormInput {
     Pokemon: string
 }
-
 
 export default function PokemonForm(props:{handleNext:() => void}) {
     const { 
@@ -13,8 +14,11 @@ export default function PokemonForm(props:{handleNext:() => void}) {
         formState: { errors },
         handleSubmit 
     } = useForm<IFormInput>()
+
+    const {updatePokemon} =usePokemonContext();
+    
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
-        console.log(data);
+        updatePokemon(data.Pokemon);
         props.handleNext();
     };
 

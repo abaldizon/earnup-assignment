@@ -13,7 +13,6 @@ export default function BasicInfoForm(props:{handleNext:() => void}) {
         handleSubmit 
     } = useForm<IFormInput>()
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
-        console.log(data);
         props.handleNext();
     };
 
